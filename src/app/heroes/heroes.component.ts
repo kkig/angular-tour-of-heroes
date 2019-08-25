@@ -8,13 +8,10 @@ import { HeroService } from '../services/hero.service';
     <h2>My Heroes</h2>
     <ul class="heroes">
       <li *ngFor="let hero of heroes"
-          [class.selected]="hero === selectedHero"
-          (click)="onSelect(hero)">
+          routerLink="/detail/{{ hero.id }}">
         <span class="badge">{{ hero.id }}</span> {{ hero.name }}
       </li>
     </ul>
-
-    <app-hero-detail [hero]="selectedHero"></app-hero-detail>
 
 
   `,
@@ -22,7 +19,6 @@ import { HeroService } from '../services/hero.service';
 })
 export class HeroesComponent implements OnInit {
 
-  selectedHero: Hero;
   heroes: Hero[];
 
   constructor(
@@ -31,10 +27,6 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit() {
     this.getHeroes();
-  }
-
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
   }
 
   getHeroes(): void {
